@@ -3,25 +3,32 @@
 
 class smartArray {
 public:
+
 	smartArray(int size) {
-		Arr = new int[size];
+		size_arr = 0;
+		Arr = new int[size] {};
 	}
 	~smartArray() {
 		delete[] Arr;
 	}
-	void setElement(int index, int value, int size) {
+	/*void setElement(int index, int value, int size) {
 		if (index >= 0 && index < size) {
 			Arr[index] = value;
 		}
 		else {
 			std::cout << "index is out of range array: ";
 		}
-	}
+	}*/
 	void printElement(int index) {
 		std::cout << "Array[" << index << "] = " << Arr[index] << std::endl;
 	}
+	void push(int value, int size) {
+		if (size_arr < size) { Arr[size_arr] = value; size_arr++; }
+		else std::cout << "Array is overloaded, not enough space";
+	}
 private:
 	int* Arr;
+	int size_arr;
 };
 
 void create_arr(int size) {
@@ -30,7 +37,8 @@ void create_arr(int size) {
 	for (int i = 0; i < size; i++) {
 		std::cout << "Please insert value of array" << std::endl;
 		std::cin >> value;
-		sa.setElement(i, value, size);
+		//sa.setElement(i, value, size);
+		sa.push(value, size);
 	}
 	for (int j = 0; j < size; j++){ sa.printElement(j); }
 }
